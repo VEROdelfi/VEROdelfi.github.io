@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informática para todos | Soluciones tecnológicas</title>
+<style>
+:root {
+  --site-primary: #176B87;
+  --site-on-primary: #FFFFFF;
+  --site-secondary: #DDF4F2;
+  --site-on-secondary: #123C49;
+  --site-background: #F5F9FC;
+  --site-on-background: #132B3A;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: light-dark(#FFFFFF, #16242D);
+  --muted: light-dark(#587080, #B5C7D0);
+  --border: light-dark(#DCE7ED, #334852);
+}
+* { box-sizing: border-box; }
+html { color-scheme: light dark; scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { width: 100%; min-height: 100vh; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; overflow: hidden; }
+a { color: inherit; }
+.container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+header { position: relative; z-index: 2; border-bottom: 1px solid var(--border); background: var(--surface); }
+.nav { display:flex; justify-content:space-between; align-items:center; min-height:76px; gap:20px; }
+.brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-weight:800; letter-spacing:-.03em; }
+.logo { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; background:var(--site-primary); color:var(--site-on-primary); font-weight:900; font-size:20px; }
+.brand small { display:block; color:var(--muted); font-size:11px; letter-spacing:.11em; text-transform:uppercase; margin-top:3px; }
+nav { display:flex; align-items:center; gap:24px; font-size:14px; color:var(--muted); }
+nav a { text-decoration:none; }
+nav a:hover { color:var(--site-primary); }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:13px 19px; border-radius:calc(13px * var(--site-radius-scale)); background:var(--site-primary); color:var(--site-on-primary); font-weight:700; text-decoration:none; border:1px solid var(--site-primary); transition:transform .15s ease, opacity .15s ease; cursor:pointer; }
+.btn:hover { transform:translateY(-1px); opacity:.92; }
+.btn.secondary { background:transparent; color:var(--site-on-background); border-color:var(--border); }
+.hero { position:relative; padding:clamp(64px, 9vw, 112px) 0 80px; background:linear-gradient(130deg, var(--site-secondary), var(--site-background) 66%); }
+.hero-grid { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:54px; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; border:1px solid color-mix(in srgb, var(--site-primary) 24%, transparent); border-radius:999px; padding:8px 12px; color:var(--site-primary); font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+h1 { font-family:var(--site-font-heading); font-size:calc(clamp(42px, 5.6vw, 68px) * var(--site-heading-scale)); line-height:1.04; letter-spacing:-.055em; margin:22px 0; max-width:680px; }
+h1 span { color:var(--site-primary); }
+.lead { color:var(--muted); font-size:18px; line-height:1.75; max-width:580px; }
+.actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.note { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:13px; margin-top:24px; }
+.art { min-height:350px; position:relative; display:grid; place-items:center; }
+.orb { position:absolute; width:300px; height:300px; border-radius:50%; background:var(--site-primary); opacity:.12; filter:blur(1px); }
+.device { position:relative; width:min(100%, 390px); background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:24px; box-shadow:0 24px 70px #123c4920; transform:rotate(2deg); }
+.device-top { display:flex; gap:6px; margin-bottom:22px; }
+.dot { width:8px;height:8px;border-radius:50%;background:var(--border); }
+.screen-title { font-size:12px; color:var(--muted); margin-bottom:8px; }
+.screen-head { font-size:23px; font-weight:800; letter-spacing:-.04em; margin-bottom:18px; }
+.task { display:flex; align-items:center; gap:12px; padding:13px 0; border-top:1px solid var(--border); font-size:14px; }
+.task-icon { display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--site-secondary);color:var(--site-on-secondary);font-size:18px; }
+.status { margin-left:auto; font-size:11px; color:var(--site-primary); font-weight:800; }
+.floating { position:absolute; right:-4px; bottom:14px; background:var(--surface); border:1px solid var(--border); padding:14px 16px; border-radius:15px; box-shadow:0 12px 30px #123c4918; font-size:13px; font-weight:700; }
+section { padding:80px 0; }
+.section-head { max-width:670px; margin-bottom:34px; }
+.kicker { color:var(--site-primary); font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+h2 { font-size:calc(clamp(30px, 4vw, 44px) * var(--site-heading-scale)); letter-spacing:-.045em; line-height:1.12; margin:13px 0; }
+.section-head p, .card p, .about-copy p { color:var(--muted); line-height:1.75; }
+.cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:calc(19px * var(--site-radius-scale)); padding:26px; }
+.card-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:14px; background:var(--site-secondary); color:var(--site-on-secondary); font-size:22px; margin-bottom:20px; }
+.card h3 { font-size:19px; margin:0 0 9px; letter-spacing:-.02em; }
+.card p { font-size:14px; margin:0; }
+.about { background:var(--site-secondary); color:var(--site-on-secondary); }
+.about-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; align-items:center; }
+.about .kicker { color:var(--site-primary); }
+.about-copy p { color:color-mix(in srgb, var(--site-on-secondary) 75%, transparent); }
+.points { display:grid; gap:14px; margin-top:24px; }
+.point { display:flex; gap:12px; align-items:flex-start; font-weight:650; }
+.check { flex:0 0 24px; width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:var(--site-primary); color:white; font-size:13px; }
+.contact-panel { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; background:var(--site-primary); color:var(--site-on-primary); padding:clamp(28px, 5vw, 48px); border-radius:calc(24px * var(--site-radius-scale)); }
+.contact-panel h2 { margin-top:0; max-width:650px; }
+.contact-panel p { opacity:.85; line-height:1.7; max-width:650px; }
+.contact-panel .btn { background:white; color:#123C49; border-color:white; white-space:nowrap; }
+footer { padding:26px 0; border-top:1px solid var(--border); color:var(--muted); font-size:13px; }
+.footer-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+@media (max-width:760px) {
+ .container { width:min(100% - 32px, 560px); }
+ .nav { min-height:68px; }
+ nav a:not(.btn) { display:none; }
+ nav { gap:0; }
+ .nav .btn { padding:10px 12px; font-size:13px; }
+ .hero { padding:58px 0 50px; }
+ .hero-grid, .about-grid { grid-template-columns:1fr; gap:28px; }
+ .art { min-height:300px; }
+ .device { max-width:370px; }
+ .cards { grid-template-columns:1fr; }
+ section { padding:60px 0; }
+ .contact-panel { grid-template-columns:1fr; }
+ .contact-panel .btn { justify-self:start; }
+}
+@media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; transition:none!important; } }
+</style>
+</head>
+<body>
+<div id="app" data-sites-preview-theme="custom">
+<header>
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="Informática para todos, inicio">
+      <span class="logo">IT</span>
+      <span>Informática para todos<small>Soluciones digitales</small></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Sobre nosotros</a>
+      <a class="btn" href="#contacto">Hablemos <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><span aria-hidden="true">✳</span> Tecnología clara, soluciones reales</div>
+      <h1>La informática, <span>más fácil</span> para todos.</h1>
+      <p class="lead">Soluciones tecnológicas prácticas para personas y pequeños negocios. Te ayudamos a resolver problemas informáticos, mejorar tus herramientas digitales y trabajar con más tranquilidad.</p>
+      <div class="actions">
+        <a class="btn whatsapp-link" href="#contacto">Consultar por WhatsApp <span aria-hidden="true">↗</span></a>
+        <a class="btn secondary" href="#servicios">Ver servicios</a>
+      </div>
+      <div class="note"><span aria-hidden="true">✓</span> Atención cercana · Explicaciones sencillas · Soluciones a tu medida</div>
+    </div>
+    <div class="art" aria-label="Ilustración de un panel de soporte informático">
+      <div class="orb"></div>
+      <div class="device">
+        <div class="device-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="screen-title">INFORMÁTICA PARA TODOS</div>
+        <div class="screen-head">¿En qué podemos ayudarte?</div>
+        <div class="task"><span class="task-icon">⌘</span><span>Soporte informático</span><span class="status">A TU MEDIDA</span></div>
+        <div class="task"><span class="task-icon">⌁</span><span>Redes y conectividad</span><span class="status">SOLUCIONES</span></div>
+        <div class="task"><span class="task-icon">▤</span><span>Asesoría tecnológica</span><span class="status">CLARIDAD</span></div>
+      </div>
+      <div class="floating">✦ Tecnología sin complicaciones</div>
+    </div>
+  </div>
+</section>
+<section id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Qué hacemos</div>
+      <h2>Soluciones para tus necesidades digitales.</h2>
+      <p>Un servicio de ingeniería en sistemas con un enfoque práctico, cercano y pensado para que la tecnología trabaje a tu favor.</p>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="card-icon" aria-hidden="true">⌘</div><h3>Soporte informático</h3><p>Diagnóstico y orientación para resolver incidencias en equipos, programas y herramientas digitales. Cuéntanos qué ocurre y buscamos la mejor solución.</p></article>
+      <article class="card"><div class="card-icon" aria-hidden="true">⌁</div><h3>Redes y sistemas</h3><p>Asesoría para configuración, conectividad, organización y mejora de sistemas informáticos, adaptada a las necesidades de cada usuario o negocio.</p></article>
+      <article class="card"><div class="card-icon" aria-hidden="true">▤</div><h3>Asesoría tecnológica</h3><p>Te ayudamos a elegir herramientas digitales, optimizar procesos y entender mejor la tecnología antes de invertir tiempo o dinero.</p></article>
+      <article class="card"><div class="card-icon" aria-hidden="true">⌨</div><h3>Desarrollo y automatización</h3><p>Orientación para proyectos de software, páginas web y automatización de tareas, según el alcance y los requisitos de cada proyecto.</p></article>
+      <article class="card"><div class="card-icon" aria-hidden="true">▦</div><h3>Capacitación digital</h3><p>Explicaciones paso a paso para aprender a usar herramientas informáticas con más confianza, sin tecnicismos innecesarios.</p></article>
+      <article class="card"><div class="card-icon" aria-hidden="true">◎</div><h3>Soluciones a medida</h3><p>¿Tienes un reto tecnológico distinto? Cuéntanos tu idea y revisamos cómo podemos ayudarte o qué alternativa te conviene.</p></article>
+    </div>
+  </div>
+</section>
+<section class="about" id="nosotros">
+  <div class="container about-grid">
+    <div>
+      <div class="kicker">Nuestra forma de trabajar</div>
+      <h2>La tecnología debe ayudarte, no complicarte.</h2>
+    </div>
+    <div class="about-copy">
+      <p>En <strong>Informática para todos</strong> acercamos la ingeniería en sistemas a las necesidades reales de cada persona y negocio. Priorizamos la comunicación clara, las soluciones útiles y las recomendaciones ajustadas a cada caso.</p>
+      <div class="points">
+        <div class="point"><span class="check">✓</span><span>Explicamos las opciones con un lenguaje fácil de entender.</span></div>
+        <div class="point"><span class="check">✓</span><span>Buscamos soluciones prácticas, no complicaciones innecesarias.</span></div>
+        <div class="point"><span class="check">✓</span><span>Definimos contigo el alcance antes de comenzar un trabajo.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contacto">
+  <div class="container">
+    <div class="contact-panel">
+      <div><div class="kicker" style="color:#DDF4F2">Hablemos de tu proyecto</div><h2>¿Necesitas ayuda con la tecnología?</h2><p>Escríbenos por WhatsApp, cuéntanos qué necesitas y te responderemos para valorar los siguientes pasos.</p></div>
+      <a class="btn whatsapp-link" href="#contacto">Contactar por WhatsApp <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="container footer-inner"><span><strong>Informática para todos</strong> · Soluciones digitales</span><span>Atención en zona por definir · © <span id="year">2026</span></span></div></footer>
+</div>
+<script>
+/* Personaliza el número en formato internacional, solo dígitos, sin + ni espacios. */
+const WHATSAPP_NUMBER = "34623337557";
+const MESSAGE = "Hola, me interesa conocer sus servicios de ingeniería en sistemas.";
+document.querySelectorAll(".whatsapp-link").forEach(link => {
+  if (WHATSAPP_NUMBER) {
+    link.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(MESSAGE);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  } else {
+    link.href = "mailto:?subject=" + encodeURIComponent("Consulta - Informática para todos") + "&body=" + encodeURIComponent(MESSAGE + "\n\nPor favor, configura tu número de WhatsApp en el código de la web.");
+    link.title = "Añade tu número de WhatsApp para activar este botón";
+  }
+});
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
